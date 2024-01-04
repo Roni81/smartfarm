@@ -58,7 +58,7 @@ test_data = sorted(test_data)
 
 </code></pre>
 
-
+### make preprocess image
 <pre><code>
 main_path = "/content/drive/MyDrive/growingdata2"
 
