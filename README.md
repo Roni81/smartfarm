@@ -1,7 +1,7 @@
 # Smartfarm Project
 <hr/>
 <img src="https://img.shields.io/badge/background-SmartFarm-blue"/>
-```
+```python
 import os
 from glob import glob
 
