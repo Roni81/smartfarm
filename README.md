@@ -58,7 +58,7 @@ test_data = sorted(test_data)
 
 </code></pre>
 
-### Make preprocess image
+### Make preprocess image folders
 <pre><code>
 main_path = "/content/drive/MyDrive/growingdata2"
 
@@ -70,3 +70,72 @@ if not os.path.exists(preprocessing_train_images):
 if not os.path.exists(preprocessing_test_images):
     os.mkdir(preprocessing_test_images)
 </code></pre>
+
+### Image Augmentation
+<pre><code>
+def automatic_brightness_and_contrast(image, clip_hist_percent = 0.025):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+     # Calculate grayscale histogram
+    hist = cv2.calcHist([gray],[0],None,[256],[0,256])
+    hist_size = len(hist)
+
+    # Calculate cumulative distribution from the histogram
+    accumulator = []
+    accumulator.append(float(hist[0]))
+    for index in range(1, hist_size):
+        accumulator.append(accumulator[index -1] + float(hist[index]))
+
+    # Locate points to clip
+    maximum = accumulator[-1]
+    clip_hist_percent *= (maximum/100.0)
+    clip_hist_percent /= 2.0
+
+    # Locate left cut
+    minimum_gray = 0
+    while accumulator[minimum_gray] < clip_hist_percent:
+        minimum_gray += 1
+
+    # Locate right cut
+    maximum_gray = hist_size -1
+    while accumulator[maximum_gray] >= (maximum - clip_hist_percent):
+        maximum_gray -= 1
+
+    # Calculate alpha and beta values
+    alpha = 255 / (maximum_gray - minimum_gray)
+    beta = -minimum_gray * alpha
+
+    auto_result = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
+    return (auto_result)
+
+</code></pre>
+
+### Data Processing
+<pre><code>
+def get_image_data(dir_in, dir_out):
+
+    ratio_lst = []
+
+    for i in tqdm(dir_in):
+        name = i.split("/")[-1] #i.split("/")[-1]
+        img = cv2.imread(i,cv2.IMREAD_COLOR)
+        img = cv2.resize(img, (1000,750))
+        brightscale = automatic_brightness_and_contrast(img)
+        imgcopy = brightscale.copy()
+        hsvimage = cv2.cvtColor(brightscale,cv2.COLOR_BGR2HSV)
+        lower = np.array([22,40,0])
+        upper = np.array([85,255,245])
+        mask = cv2.inRange(hsvimage, lower, upper)
+        number_of_white_pix = np.sum(mask == 255)
+        number_of_black_pix = np.sum(mask == 0)
+        ratio = number_of_white_pix / (number_of_white_pix + number_of_black_pix)
+        ratio_lst.append(ratio)
+        result = cv2.bitwise_and(imgcopy, imgcopy, mask = mask)
+        cv2.imwrite(os.path.join(dir_out, name), result)
+
+    return ratio_lst
+
+    </code></pre>
+
+
+
