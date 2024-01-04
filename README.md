@@ -57,3 +57,16 @@ test_data = test_data = glob(main_path + "/test/meta/*.csv")
 test_data = sorted(test_data)
 
 </code></pre>
+
+
+<pre><code>
+main_path = "/content/drive/MyDrive/growingdata2"
+
+preprocessing_train_images = main_path + "/preprocessing_train"
+preprocessing_test_images = main_path + "/preprocessing_test"
+
+if not os.path.exists(preprocessing_train_images):
+    os.mkdir(preprocessing_train_images)
+if not os.path.exists(preprocessing_test_images):
+    os.mkdir(preprocessing_test_images)
+</code></pre>
