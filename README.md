@@ -37,7 +37,7 @@ from keras.callbacks import EarlyStopping
 
 
 
-Read image DATA
+###Read image DATA
 <pre><code>
 main_path = "/content/drive/MyDrive/growingdata2"
 
