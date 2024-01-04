@@ -1,7 +1,8 @@
 # Smartfarm Project
 <hr/>
 <img src="https://img.shields.io/badge/background-SmartFarm-blue"/>
-<pre><code>{import os
+<pre><code>
+import os
 from glob import glob
 
 import cv2
@@ -31,4 +32,5 @@ from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.losses import MeanAbsoluteError
 from tensorflow.keras.optimizers import Adam
-from keras.callbacks import EarlyStopping}</code></pre>
+from keras.callbacks import EarlyStopping
+</code></pre>
