@@ -35,6 +35,9 @@ from tensorflow.keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
 </code></pre>
 
+
+
+Read image DATA
 <pre><code>
 main_path = "/content/drive/MyDrive/growingdata2"
 
