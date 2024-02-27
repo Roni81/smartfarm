@@ -1,44 +1,58 @@
 # Smartfarm Project
-<hr/>
-<img src="https://img.shields.io/badge/background-SmartFarm-blue"/>
-<pre><code>
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Numpy](https://img.shields.io/badge/Numpy-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![Scikit](https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+
+## Flow_Chart
+![](https://github.com/Roni81/smartfarm/blob/main/info_gram.png)
+
+### Import Library
+```python
 import os
 from glob import glob
-
+```
+```python
 import cv2
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from itertools import groupby
 import random
-
+```
+```python
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-
+```
+```python
 import torch
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
 import torch.nn as nn
-
+```
+```python
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-
+```
+```python
 from catboost import CatBoostRegressor
 import matplotlib.pyplot as plt
-
+```
+```python
 import tensorflow as tf
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.losses import MeanAbsoluteError
 from tensorflow.keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
-</code></pre>
-
+```
 
 
 ### Read image DATA
-<pre><code>
+```python
 main_path = "/content/drive/MyDrive/growingdata2"
 
 train_imgs = glob(main_path + "/train/*/*/*.jpg") + glob(main_path + "/train/*/*/*.png")
@@ -55,8 +69,7 @@ train_label = sorted(train_label)
 
 test_data = test_data = glob(main_path + "/test/meta/*.csv")
 test_data = sorted(test_data)
-
-</code></pre>
+```
 
 ### Make preprocess image folders
 <pre><code>
@@ -72,7 +85,7 @@ if not os.path.exists(preprocessing_test_images):
 </code></pre>
 
 ### Image Augmentation
-<pre><code>
+```python
 def automatic_brightness_and_contrast(image, clip_hist_percent = 0.025):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -107,11 +120,10 @@ def automatic_brightness_and_contrast(image, clip_hist_percent = 0.025):
 
     auto_result = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
     return (auto_result)
-
-</code></pre>
+```
 
 ### Data Processing
-<pre><code>
+```python
 def get_image_data(dir_in, dir_out):
 
     ratio_lst = []
@@ -134,8 +146,7 @@ def get_image_data(dir_in, dir_out):
         cv2.imwrite(os.path.join(dir_out, name), result)
 
     return ratio_lst
-
-    </code></pre>
+```
 
 
 
