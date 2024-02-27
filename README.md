@@ -6,6 +6,9 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
 
+## PPT link
+https://github.com/Roni81/smartfarm/blob/main/smartfarm(%EC%B5%9C%EC%A2%85%EA%B3%BC%EC%A0%9C).pdf
+
 ## Flow_Chart
 ![](https://github.com/Roni81/smartfarm/blob/main/info_gram.png)
 
